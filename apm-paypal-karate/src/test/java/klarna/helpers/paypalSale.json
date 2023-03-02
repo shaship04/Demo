@@ -1,0 +1,39 @@
+{
+  "transactionReference": "#(reference)",
+  "merchant": {
+    "entity": "default-FR"
+  },
+  "instruction": {
+    "description": {
+      "line1": "trading name"
+    },
+    "paymentInstrument": {
+      "type": "PAYPAL",
+      "shippingAddress": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "street": "8500 Govenors Hill Drive",
+        "postalCode": "45249",
+        "city": "Arkansa",
+        "state": "TEXAS",
+        "countryCode": "US"
+      },
+      "billingAddress": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "shopperEmailAddress":"email@email.com",
+        "address1": "8500 Govenors Hill Drive",
+        "address2": "Symmes Township",
+        "address3": "Tamilnadu chennai",
+        "postalCode": "45249",
+        "city": "Arkansa",
+        "state": "TEXAS",
+        "countryCode": "US"
+      }
+    },
+    "value": {
+      "currency": "EUR",
+      "amount": 1000
+    }
+  }
+}
