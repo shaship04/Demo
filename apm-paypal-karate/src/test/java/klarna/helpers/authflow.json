@@ -1,0 +1,64 @@
+{
+  "transactionReference": "#(reference)",
+  "merchant": {
+    "entity": "default-FR"
+  },
+  "instruction": {
+    "description": {
+      "line1": "trading name"
+    },
+    "klarnapaylaterSSL":{
+      "shopperCountryCode":"AT",
+      "locale":"de-AT"
+    },
+    "paymentInstrument": {
+      "type": "KLARNA",
+      "shippingAddress": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "address1": "8500 Govenors Hill Drive",
+        "address2": "Symmes Township",
+        "postalCode": "45249",
+        "city": "Ohio",
+        "state": "TEXAS",
+        "countryCode": "US",
+        "telephoneNumber": "0123456789"
+      },
+      "billingAddress": {
+        "firstName": "John",
+        "lastName": "Johnson",
+        "shopperEmailAddress": "email@email.com",
+        "address1": "8500 Govenors Hill Drive",
+        "address2": "Symmes Township",
+        "postalCode": "4367",
+        "city": "Ohio",
+        "state": "TEXAS",
+        "countryCode": "US",
+        "telephoneNumber": "0123456789"
+      }
+    },
+    "orderContent": {},
+    "statementNarrative": {},
+    "orderLines": {
+      "orderTaxAmount": 0,
+      "termsURL": "http://www.worldpay.com/termsURL",
+      "lineItem": {
+        "reference": "test",
+        "name": "mango",
+        "quantity": 1,
+        "quantityUnit": "bag",
+        "unitPrice": 1700,
+        "taxRate": 0,
+        "totalAmount": 1700,
+        "totalTaxAmount": 0,
+        "totalDiscountAmount": 0,
+        "productURL": "https://www.estore.com/products/f2a8d7e34",
+        "imageURL": "https://www.exampleobjects.com/logo.png"
+      }
+    },
+    "value": {
+      "currency": "EUR",
+      "amount": 1700
+    }
+  }
+}
