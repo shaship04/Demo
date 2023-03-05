@@ -1,0 +1,89 @@
+plugins {
+    id 'io.gatling.gradle' version '3.6.1'
+    id 'scala'
+
+
+}
+ apply plugin: 'scala'
+ apply plugin: 'java'
+
+
+group 'com.worldpay.apm'
+version '0.0.1-SNAPSHOT'
+
+sourceSets {
+
+    gatling {
+        scala.srcDirs = ["src/test/scala"]
+        resources.srcDirs = ["src/test/resources"]
+    }
+
+    test {
+        scala.srcDirs = ["src/test/scala"]
+        resources.srcDirs = ["src/test/resources"]
+    }
+
+}
+
+dependencies {
+    testCompileClasspath group: 'org.scala-lang',name: 'scala-library',version: '2.13'
+    implementation group: 'org.scalatestplus.play', name: 'scalatestplus-play_2.13', version: '5.0.0'
+    testImplementation 'junit:junit:4.12'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
+    testImplementation 'org.scalatest:scalatest_2.12:3.0.8'
+    testRuntimeOnly 'org.scala-lang.modules:scala-xml_2.12:1.2.0'
+    implementation group: 'io.gatling', name: 'gatling-app', version: '3.6.1'
+    implementation group: 'io.gatling', name: 'gatling-recorder', version: '3.6.1'
+    implementation group: 'io.gatling', name: 'gatling-charts', version: '3.6.1'
+    implementation group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '3.6.1'
+    implementation "io.gatling:gatling-enterprise-plugin-commons:0.0.3"
+
+}
+
+def versions = [
+        ScalaBinary: "2.13",
+        AkkaVersion: "2.6.15"
+]
+dependencies {
+    implementation platform("com.typesafe.akka:akka-bom_${versions.ScalaBinary}:${versions.AkkaVersion}")
+    implementation "com.typesafe.akka:akka-slf4j_${versions.ScalaBinary}:${versions.AkkaVersion}"
+    implementation "com.typesafe.akka:akka-protobuf-v3_${versions.ScalaBinary}:${versions.AkkaVersion}"
+    implementation "com.typesafe.akka:akka-serialization-jackson_${versions.ScalaBinary}:${versions.AkkaVersion}"
+    implementation "com.typesafe.akka:akka-stream_${versions.ScalaBinary}:${versions.AkkaVersion}"
+    implementation "com.typesafe.akka:akka-actor-typed_${versions.ScalaBinary}:${versions.AkkaVersion}"
+    implementation "com.typesafe.akka:akka-actor_${versions.ScalaBinary}:${versions.AkkaVersion}"
+
+}
+
+ext {
+    if (!project.findProperty("token")) {
+        ext.token = ""
+    }
+
+}
+
+
+task loadTest(type: JavaExec) {
+    description = 'Test load the paypal service with Gatling'
+    group = 'Load Test'
+    classpath = sourceSets.test.runtimeClasspath
+    systemProperties = [
+            token: project.getProperty('token')
+            ]
+
+    jvmArgs = [
+            "-Dgatling.core.directory.binaries=${sourceSets.test.output.classesDirs.toString()}",
+            "-Dlogback.configurationFile=${logbackGatlingConfig()}"
+    ]
+    main = 'io.gatling.app.Gatling'
+    args = [
+            '--simulation', 'com.worldpay.apm.paypal.performance.simulations.AllSimulations',
+           '--results-folder', "${buildDir}/gatling-results",
+            '--binaries-folder', sourceSets.test.output.classesDirs.toString()
+    ]
+}
+
+
+def logbackGatlingConfig() {
+    return sourceSets.test.resources.find { it.name == 'logback.xml'};
+}

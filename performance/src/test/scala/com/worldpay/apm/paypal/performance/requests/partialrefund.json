@@ -1,0 +1,7 @@
+{
+  "value": {
+    "amount": 1000,
+    "currency": "EUR"
+  },
+  "reference": "refund-reference"
+}
