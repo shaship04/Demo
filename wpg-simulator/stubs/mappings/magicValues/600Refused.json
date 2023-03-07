@@ -1,0 +1,18 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "WP-CorrelationId": {
+        "matches": "MAGIC_VALUE_REFUSED_600"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "magicValues/600Refused.xml",
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  }
+}

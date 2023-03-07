@@ -1,0 +1,18 @@
+{
+  "priority": 3,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "WP-CorrelationId": {
+        "matches": "MAGIC_VALUE_ERROR_500"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "magicValues/500Error.xml",
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  }
+}

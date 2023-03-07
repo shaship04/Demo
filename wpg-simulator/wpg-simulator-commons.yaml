@@ -1,0 +1,43 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: apm-paypal-wpg-simulator-common
+#OBJECTS
+objects:
+#Service==========================================================================================
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: apm-paypal-wpg-simulator
+    name: apm-paypal-wpg-simulator
+  spec:
+    ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: apm-paypal-wpg-simulator
+      deploymentconfig: apm-paypal-wpg-simulator
+    sessionAffinity: None
+    type: ClusterIP
+#Routes===========================================================================================
+- apiVersion: v1
+  kind: Route
+  metadata:
+    labels:
+      app: apm-paypal-wpg-simulator
+    name: apm-paypal-wpg-simulator
+  spec:
+    port:
+      targetPort: http
+    tls:
+      termination: edge
+      insecureEdgeTerminationPolicy: Redirect
+    to:
+      kind: Service
+      name: apm-paypal-wpg-simulator
+      weight: 100
+    wildcardPolicy: None
+

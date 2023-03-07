@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE paymentService PUBLIC "-//WorldPay//DTD WorldPay PaymentService v1//EN"
+        "http://dtd.wp.fte66.test.worldpay.com/dtd/paymentService_v1.dtd">
+<paymentService version="1.4" merchantCode="MAVERICKS01">
+    <reply>
+        <orderStatus orderCode="simulatororder141">
+            <payment>
+                <paymentMethod>PAYPAL-SSL</paymentMethod>
+                <amount value="700" currencyCode="GBP" exponent="2" debitCreditIndicator="credit"/>
+                <lastEvent>REFUND_FAILED</lastEvent>
+                <balance accountType="IN_PROCESS_CAPTURED">
+                    <amount value="700" currencyCode="GBP" exponent="2" debitCreditIndicator="credit"/>
+                </balance>
+            </payment>
+            <date dayOfMonth="20" month="12" year="2021" hour="12" minute="36" second="1"/>
+        </orderStatus>
+    </reply>
+</paymentService>

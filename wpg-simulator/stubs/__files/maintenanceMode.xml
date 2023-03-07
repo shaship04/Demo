@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>503: Maintenance</title>
+    <style type="text/css" media="print"> @import url(/pictures/print.css);</style>
+    <style type="text/css" media="screen"> @import url(/pictures/adminstyle-branded.css);</style>
+</head>
+
+<body class="standalone">
+<div class="content"><span class="legend">Maintenance</span><div class="status">Status: 503</div>
+    <p>
+        The server is in maintenance mode, please try again in 5 minutes.
+        <br />
+    </p>
+</div>
+</body>
+</html>

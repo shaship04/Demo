@@ -1,0 +1,18 @@
+{
+  "priority": -10,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "WP-CorrelationId": {
+        "matches": "PARTIAL_REFUND"
+      }
+    }
+  },
+  "response": {
+    "status": 202,
+    "bodyFileName": "partialRefund.xml",
+    "headers": {
+      "Content-Type": "text/plain"
+    }
+  }
+}

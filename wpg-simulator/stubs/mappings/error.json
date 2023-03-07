@@ -1,0 +1,18 @@
+{
+    "priority": -10,
+    "request": {
+        "method": "POST",
+        "headers": {
+            "WP-CorrelationId": {
+                "matches": "ERROR"
+            }
+        }
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName": "error.xml",
+        "headers": {
+            "Content-Type": "text/plain"
+        }
+    }
+}

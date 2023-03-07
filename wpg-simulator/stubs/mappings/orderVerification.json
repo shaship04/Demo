@@ -1,0 +1,23 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "bodyPatterns" : [ {
+      "matchesXPath" : "/paymentService[@version='1.4']"
+
+    } ],
+    "headers": {
+      "WP-CorrelationId": {
+        "matches": "ORDER_SUCCESS"
+      }
+    }
+  },
+
+  "response": {
+    "status": 200,
+    "bodyFileName": "orderVerificationSuccess.xml",
+    "headers": {
+      "Content-Type": "application/xml"
+    }
+  }
+}

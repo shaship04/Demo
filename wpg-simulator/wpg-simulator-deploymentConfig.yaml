@@ -1,0 +1,58 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: apm-paypal-wpg-simulator-deploy
+#OBJECTS
+objects:
+#DeploymentConfig=================================================================================
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: apm-paypal-wpg-simulator
+    name: apm-paypal-wpg-simulator
+  spec:
+    replicas: 2
+    revisionHistoryLimit: 5
+    selector:
+      app: apm-paypal-wpg-simulator
+      deploymentconfig: apm-paypal-wpg-simulator
+    strategy:
+      type: Rolling
+      resources:
+        limits:
+          cpu: 500m
+          memory: 800Mi
+        requests:
+          cpu: 400m
+          memory: 700Mi
+    template:
+      metadata:
+        labels:
+          app: apm-paypal-wpg-simulator
+          deploymentconfig: apm-paypal-wpg-simulator
+      spec:
+        containers:
+        - image: "image-registry.openshift-image-registry.svc:5000/maverick-afec/apm-paypal-wpg-simulator"
+          imagePullPolicy: Always
+          name: apm-paypal-wpg-simulator
+          env:
+            - name: EXTRA_WIREMOCK_OPTIONS
+              value: "--no-request-journal --disable-request-logging --verbose"
+          ports:
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+            requests:
+              cpu: 1000m
+              memory: 1000Mi
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+        securityContext: {}
+    test: false
+    triggers: []

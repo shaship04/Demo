@@ -1,0 +1,18 @@
+{
+    "priority": -10,
+    "request": {
+        "method": "POST",
+        "headers": {
+            "WP-CorrelationId": {
+                "matches": "MAINTENANCE_MODE"
+            }
+        }
+    },
+    "response": {
+        "status": 503,
+        "bodyFileName": "maintenanceMode.xml",
+        "headers": {
+            "Content-Type": "text/html"
+        }
+    }
+}

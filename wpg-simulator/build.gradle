@@ -1,0 +1,52 @@
+plugins {
+    id 'com.avast.gradle.docker-compose' version '0.14.7'
+
+}
+
+
+dockerCompose {
+    tcpPortsToIgnoreWhenWaiting = [8008, 28080, 28081, 8474] //Don't wait for JVM debug port [Port 8008 is open only in QA and BDD env]
+
+    println("---------------------------")
+    println(" docker compose ")
+
+    useComposeFiles = ["../docker-compose.yml"]
+    startedServices = ['wpg-simulator']
+    environment.put 'http_proxy', System.getenv('http_proxy') ?: ''
+    environment.put 'https_proxy', System.getenv('https_proxy') ?: ''
+    environment.put 'no_proxy', System.getenv('no_proxy') ?: ''
+    environment.put 'COMPOSE_HTTP_TIMEOUT', System.getenv('COMPOSE_HTTP_TIMEOUT') ?: '64'
+    environment.put 'COMPOSE_PARALLEL_LIMIT', System.getenv('COMPOSE_PARALLEL_LIMIT') ?: '20'
+
+    buildBeforeUp = false
+    buildBeforePull = false
+    upAdditionalArgs = ['--no-build', '--remove-orphans']
+    downAdditionalArgs = ['--remove-orphans']
+    waitForTcpPortsDisconnectionProbeTimeout = Duration.ofMillis 100
+
+    stopContainers = true
+    removeContainers = true
+    retainContainersOnStartupFailure = false
+    removeVolumes = true
+    removeOrphans = false
+}
+
+dependencies {
+    testImplementation group: 'com.github.tomakehurst', name: 'wiremock', version: '2.12.0', ext: 'pom'
+}
+
+ext {
+    wpgSimulatorUrl = "http://localhost:8090"
+
+}
+
+composeUp.doLast {
+
+    def wpgSimulatorInfo = dockerCompose.servicesInfos.'wpg-simulator'.firstContainer
+
+    wpgSimulatorUrl = "http://${wpgSimulatorInfo.host}:${wpgSimulatorInfo.ports[8080]}"
+
+}
+
+composeBuild.dependsOn assemble
+
